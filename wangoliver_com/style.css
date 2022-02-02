@@ -1,0 +1,51 @@
+#header {
+    display: flex;
+    flex-direction: row;
+}
+
+#header h1 {
+    display: inline-block;
+}
+
+#header nav {
+    width: fit-content;
+    margin: 20px auto;
+    background-color: var(--verydkbluetrans);
+    border-radius: 20px;
+    padding-left: 20px;
+}
+
+#header ul {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    margin: 0;
+}
+
+#header ul li {
+    display: flex;
+    flex-direction: row;}
+
+#header ul li a {
+    text-decoration: none;
+    padding: 2vh 2vw;
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+#text {
+    width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#text p {
+    text-align: left;
+}
+
+#home-img {
+    width: 60%;
+}
