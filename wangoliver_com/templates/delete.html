@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>insta485</title>
+    </head>
+    <body>
+        <div class = "menu" style="display: flex; align-items: center;">
+            <a href="/"><img src="/static/images/insta-logo.png" alt="logo" style="width: 125px;"></a>
+            <span style="flex-grow: 1;"></span>
+            <span style="padding: 10px 30px;">
+                <a href="/explore/" style="text-decoration: none; padding: 10px; font-size: 20px; color: black;"><b>Explore</b></a>
+                <span style="font-size: 20px;">|</span>
+                <a href="/users/{{logname}}/" style="text-decoration: none; padding: 10px; font-size: 20px; color: black;"><b>{{logname}}</b></a>
+            </span>
+        </div>
+        <hr>
+
+        <!-- DO NOT CHANGE THIS -->
+        <form action="/accounts/?target=/accounts/create/" method="post" enctype="multipart/form-data">
+            <input type="submit" name="delete" value="confirm delete account"/>
+            <input type="hidden" name="operation" value="delete"/>
+        </form>

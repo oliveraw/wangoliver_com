@@ -15,5 +15,5 @@ app.config.from_object('wangoliver_com.config')
 # circular import, which is naughty, but Flask was designed that way.
 # (Reference http://flask.pocoo.org/docs/patterns/packages/)  We're
 # going to tell pylint and pycodestyle to ignore this coding style violation.
-# import insta485.views  # noqa: E402  pylint: disable=wrong-import-position
+import wangoliver_com.views  # noqa: E402  pylint: disable=wrong-import-position
 # import insta485.model  # noqa: E402  pylint: disable=wrong-import-position

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>insta485</title>
+        <style type="text/css">
+            .menu {
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "menu" style="display: flex; align-items: center;">
+            <a href="/"><img src="/static/images/insta-logo.png" alt="logo" style="width: 125px;"></a>
+            <span style="flex-grow: 1;"></span>
+            <span style="padding: 10px 30px;">
+                <a href="/explore/" style="text-decoration: none; padding: 10px; font-size: 20px; color: black;"><b>Explore</b></a>
+                <span style="font-size: 20px;">|</span>
+                <a href="/users/{{logname}}/" style="text-decoration: none; padding: 10px; font-size: 20px; color: black;"><b>{{logname}}</b></a>
+            </span>
+        </div>
+        <hr>
+        <div class="following">
+            {% for f in not_following %}
+                <img src="/uploads/{{f.filename}}" alt="icon">
+                <a href="/users/{{f.username}}/">{{f.username}}</a>
+                <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+                <form action="/following/?target=/explore/" method="post" enctype="multipart/form-data">
+                    <input type="submit" name="follow" value="follow"/>
+                    <input type="hidden" name="username" value="{{f.username}}"/>
+                    <input type="hidden" name="operation" value="follow"/>
+                </form>
+            {% endfor %}
+        </div>
+    </body>
+</html>

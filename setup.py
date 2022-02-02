@@ -7,9 +7,9 @@ Andrew DeOrio <awdeorio@umich.edu>
 from setuptools import setup
 
 setup(
-    name='insta485',
+    name='wangoliver_com',
     version='0.1.0',
-    packages=['insta485'],
+    packages=['wangoliver_com'],
     include_package_data=True,
     install_requires=[
         'arrow',

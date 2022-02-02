@@ -3,7 +3,7 @@
 import pathlib
 
 # Root of this application, useful if it doesn't occupy an entire domain
-APPLICATION_ROOT = '/home/wangambk/www/wangoliver_com'
+APPLICATION_ROOT = '/'
 
 # Secret key for encrypting cookies
 # SECRET_KEY = b'\xf6\x0ch=\xc2\xb5\xd2\x81\xad'

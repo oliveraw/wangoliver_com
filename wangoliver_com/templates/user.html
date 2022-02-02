@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>insta485</title>
+    <body>
+        <div class = "menu" style="display: flex; align-items: center;">
+            <a href="/"><img src="/static/images/insta-logo.png" alt="logo" style="width: 125px;"></a>
+            <span style="flex-grow: 1;"></span>
+            <span style="padding: 10px 30px;">
+                <a href="/explore/" style="text-decoration: none; padding: 10px; font-size: 20px; color: black;"><b>Explore</b></a>
+                <span style="font-size: 20px;">|</span>
+                <a href="/users/{{logname}}/" style="text-decoration: none; padding: 10px; font-size: 20px; color: black;"><b>{{logname}}</b></a>
+            </span>
+        </div>
+        <hr>
+
+        <div class="username">
+            <h1> {{ username }} </h1>
+        </div>
+        <div class="followstatus">
+            {% if not logname==username and logname_follows_username %}
+                following
+            {% elif not logname==username and not logname_follows_username%}
+                not following
+            {% endif %}
+            <br>
+        </div>
+        <div class="edit_profile_follow_status">
+            {% if logname == username %}
+                <a href = "/accounts/edit/"><b>Edit profile</b></a><br>
+                <form action="/accounts/logout/" method="post" enctype="multipart/form-data">
+                    <input type="submit" name="logout" value="Logout"/>
+                </form><br>
+                <form action="/posts/?target=/users/{{username}}/" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="image/*" required/>
+                    <input type="submit" name="create_post" value="upload new post"/>
+                    <input type="hidden" name="operation" value="create"/>
+                </form><br>
+            {% endif %}
+            {% if logname != username %}
+                {% if logname_follows_username %}
+                    <form action="/following/?target=/users/{{username}}/" method="post" enctype="multipart/form-data">
+                        <input type="submit" name="unfollow" value="unfollow"/>
+                        <input type="hidden" name="username" value="{{username}}"/>
+                        <input type="hidden" name="operation" value="unfollow"/>
+                    </form>
+                {% else %}
+                    <form action="/following/?target=/users/{{username}}" method="post" enctype="multipart/form-data">
+                        <input type="submit" name="follow" value="follow"/>
+                        <input type="hidden" name="username" value="{{username}}"/>
+                        <input type="hidden" name="operation" value="follow"/>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="stats">
+            {% if total_posts == 1 %}
+                1 post
+            {% else %}
+                {{total_posts}} posts
+            {% endif %}
+            <a href="/users/{{username}}/followers/">
+                <b>
+                    {% if followers == 1 %}
+                        1 follower
+                    {% else %}
+                        {{followers}} followers
+                    {% endif %}
+                </b>
+            </a>
+            <a href="/users/{{username}}/following/">
+                <b>
+                    {{following}} following
+                </b>
+            </a> <br>
+            {{fullname}} <br>
+        </div>
+        <div class="posts">
+            {% for post in posts %}
+                <div class="post_{{post.postid}}">
+                    <a href="/posts/{{post.postid}}/">
+                        <img src="/uploads/{{post.filename}}" alt="{{post.postid}}" height="300" width="300">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

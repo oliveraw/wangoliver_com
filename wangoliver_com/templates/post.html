@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>insta485</title>
+    </head>
+    <body>
+        <div class = "menu" style="display: flex; align-items: center;">
+            <a href="/"><img src="/static/images/insta-logo.png" alt="logo" style="width: 125px;"></a>
+            <span style="flex-grow: 1;"></span>
+            <span style="padding: 10px 30px;">
+                <a href="/explore/" style="text-decoration: none; padding: 10px; font-size: 20px; color: black;"><b>Explore</b></a>
+                <span style="font-size: 20px;">|</span>
+                <a href="/users/{{logname}}/" style="text-decoration: none; padding: 10px; font-size: 20px; color: black;"><b>{{logname}}</b></a>
+            </span>
+        </div>
+        <hr>            
+        
+        <a href="/"><img src="static/images/insta-logo.png" alt="logo" style="width: 125px;"></a>
+            <span style="flex-grow: 1;"></span>
+            <span style="padding: 10px 30px;">
+                <a href="/explore/" style="text-decoration: none; padding: 10px; font-size: 20px; color: black;"><b>Explore</b></a>
+                <span style="font-size: 20px;">|</span>
+                <a href="/users/{{logname}}/" style="text-decoration: none; padding: 10px; font-size: 20px; color: black;"><b>{{logname}}</b></a>
+            </span>
+        </div>
+
+        <div class="post"> 
+            <!-- the header of the post -->
+            <a href="/users/{{owner}}/"><img src="/uploads/{{owner_img_url}}" alt="post {{postid}}"> {{owner}}</a>
+            <a href="/posts/{{postid}}/">{{timestamp}}</a>
+        </div>
+        <div>
+            <!-- the body of the post -->
+            <img src=/uploads/{{img_url}} alt="post image">
+        </div>
+        <div>
+            <!-- the footer of the post -->
+            {% if likes == 1 %}
+            <p>1 like</p>
+            {% else %}
+            <p>{{likes}} likes</p>
+            {% endif %}
+
+            {% for comment in comments %}
+                <a href="/users/{{comment.owner}}/">{{comment.owner}}</a> 
+                <p>{{comment.text}}</p>
+                {% if comment.owner == logname %}
+                <form action="/comments/?target=/posts/{{postid}}/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="operation" value="delete"/>
+                    <input type="hidden" name="commentid" value="{{comment.commentid}}"/>
+                    <input type="submit" name="uncomment" value="delete"/>
+                </form>
+                {% endif %}
+            {% endfor %}
+            {% if owner == logname %}
+            <!-- <FIXME_LOGGED_IN_USER_PAGE_URL_HERE>" -->
+                <form action="/posts/?target=/users/{{logname}}/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="operation" value="delete"/>
+                    <input type="hidden" name="postid" value="{{postid}}"/>
+                    <input type="submit" name="delete" value="delete this post"/>
+                </form>
+            {% endif %}
+            {% if user_likes_post %}
+                <form action="/likes/?target=/posts/{{postid}}/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="operation" value="unlike"/>
+                    <input type="hidden" name="postid" value="{{postid}}"/>
+                    <input type="submit" name="unlike" value="unlike"/>
+                </form>
+            {% else %}
+                <form action="/likes/?target=/posts/{{postid}}/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="operation" value="like"/>
+                    <input type="hidden" name="postid" value="{{postid}}"/>
+                    <input type="submit" name="like" value="like"/>
+                </form>
+            {% endif %}
+            <form action="/comments/?target=/posts/{{postid}}/" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="operation" value="create"/>
+                <input type="hidden" name="postid" value="{{postid}}"/>
+                <input type="text" name="text" required/>
+                <input type="submit" name="comment" value="comment"/>
+              </form>
+
+
+        </div>
+    </body>
+</html>
